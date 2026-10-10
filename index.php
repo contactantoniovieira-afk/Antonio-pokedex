@@ -1,22 +1,26 @@
 <?php
- try {   
-    $dns = 'mysql:host=gateway01.eu-central-1.prod.aws.tidbcloud.com; port=4000 ; dbname=Antonio_Pokedex_BDD';
-    $username = '44mQ63jhWYE7FPk.root';
-    $password = 'Gdu6b7vYLKdaWSmP';
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Charge les variables du fichier .env
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+try {
+    // mysql => indique le moteur de la BDD
+    // host=localhost => l'adresse du serveur
+    // dbname=studio_exemple => nom de la base de données
+    $dns = "mysql:host={$_ENV['DB_HOST']};port={$_ENV['DB_PORT']};database={$_ENV['DB_NAME']}";
+    // Utilisateur avec lequel se connecter a la BDD
+    $utilisateur = "44mQ63jhWYE7FPk.root";
+    $motDePasse = "Gdu6b7vYLKdaWSmP";
 
     $options = [
-        #ignore le certificat SSL
         PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
-        #activer le SSL
         PDO::MYSQL_ATTR_SSL_CA => true,
-        #afficher les erreurs
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ];
-    $connection = new PDO($dns, $username, $password, $options);
- }
- catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
-    die();
- }
 
-?>
+    $connection = new PDO ($dns, $utilisateur, $motDePasse, $options);
+} catch (Exception $e) {
+    echo "Connection à la BDD impossible : ", $e->getMessage();
+    die();
+}
