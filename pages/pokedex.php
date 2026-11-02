@@ -11,7 +11,9 @@ var_dump($pokemons);
 // echo ($pokemons[0]['pokemon_nom']);
 
 foreach ($pokemons as $pokemon) {
+    echo ("<a href='detail.php'>");
     echo '<p>' . $pokemon['pokemon_nom'] . '</p>';
     echo ("<img width='150' height='150' src='{$pokemon['pokemon_img']}' alt='{$pokemon['pokemon_nom']}'>");
+    echo("</a>");
 }
 ?>
