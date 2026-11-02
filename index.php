@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Charge les variables du fichier .env
@@ -25,3 +26,8 @@ try {
     echo "Connection à la BDD impossible : ", $e->getMessage();
     die();
 }
+=======
+header("Location: pages/pokedex.php");
+exit()
+?>
+>>>>>>> 6195e9a (reorganisation du projet)
