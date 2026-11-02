@@ -1,2 +1,4 @@
 .env
 mot de passe.odt
+vendor/
+.env
